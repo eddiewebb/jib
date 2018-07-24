@@ -82,6 +82,17 @@ public class ImageReferenceTest {
   }
 
   @Test
+  public void testNonDockerHubRegistry_server() throws InvalidImageReferenceException{
+    String imageReferenceString = "example.com/cloudqa/jib-springbootdemo:latest";
+    ImageReference imageReference = ImageReference.parse(imageReferenceString);
+
+    Assert.assertEquals("example.com", imageReference.getRegistry());
+    Assert.assertEquals("cloudqa/jib-springbootdemo", imageReference.getRepository());
+    Assert.assertEquals("latest", imageReference.getTag());
+
+  }
+
+  @Test
   public void testParse_invalid() {
     for (String badImageReference : badImageReferences) {
       try {
